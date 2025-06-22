@@ -374,3 +374,78 @@ body::after {
         grid-template-columns: 1fr;
     }
 }
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.social-btn i {
+    font-size: 1.2em;
+}
+
+.social-btn.instagram {
+    background-color: #E1306C;
+    color: #fff;
+}
+
+.social-btn.instagram:hover {
+    background-color: #b32456;
+}
+
+.social-btn.facebook {
+    background-color: #1877f2;
+    color: #fff;
+}
+
+.social-btn.facebook:hover {
+    background-color: #0f5bd3;
+}
+
+.social-section {
+    padding: 5rem 0;
+    background: transparent;
+    text-align: center;
+}
+
+.social-section h2 {
+    font-size: 3rem;
+    color: #8B4513;
+    margin-bottom: 2rem;
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: row; /* או פשוט תוריד את זה, כי row זה ברירת מחדל */
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.social-btn {
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+}
+
+.social-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
