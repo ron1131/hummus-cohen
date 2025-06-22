@@ -70,7 +70,7 @@ body::after {
     top: 0;
     width: 100%;
     z-index: 1000;
-    height: 120px; /* הגדרת גובה קבוע לכותרת. ניתן לשנות לפי הצורך */
+    height: 90px; /* הגדרת גובה קבוע לכותרת. ניתן לשנות לפי הצורך */
     display: flex; /* הופך את הכותרת לקונטיינר פלקס כדי ליישר את התוכן */
     align-items: center; /* מיישר את התוכן במרכז אנכית */
 }
@@ -136,7 +136,7 @@ body::after {
 
 /* Hero Section */
 .hero {
-    background: url("Jamaica.jpg") center center no-repeat;
+    background: url("logo.png") center center no-repeat;
     background-size: contain;
     background-color: black;
     color: white;
@@ -149,7 +149,7 @@ body::after {
 }
 
 .hero-content {
-    padding: 20px;
+    padding: 220px 20px 20px 20px; /* ⬅️ יותר רווח מלמעלה להזזת התוכן */
     border-radius: 10px;
 }
 
@@ -180,12 +180,14 @@ body::after {
     border-radius: 50px;
     font-weight: 600;
     transition: transform 0.3s, box-shadow 0.3s;
+    margin-top: 20px; /* ⬅️ קצת מרווח מעל הכפתור */
 }
 
 .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
+
 
 /* Menu Section */
 .menu-section {
