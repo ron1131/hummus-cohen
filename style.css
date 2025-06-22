@@ -70,10 +70,16 @@ body::after {
     top: 0;
     width: 100%;
     z-index: 1000;
+    height: 120px; /* הגדרת גובה קבוע לכותרת. ניתן לשנות לפי הצורך */
+    display: flex; /* הופך את הכותרת לקונטיינר פלקס כדי ליישר את התוכן */
+    align-items: center; /* מיישר את התוכן במרכז אנכית */
 }
 
 .header .container {
-    padding: 1rem 20px;
+    padding: 0 20px; /* הסרת ריפוד אנכי, השארת ריפוד אופקי */
+    height: 100%; /* גורם לקונטיינר למלא את גובה הכותרת */
+    display: flex; /* הופך את הקונטיינר לקונטיינר פלקס */
+    align-items: center; /* מיישר את התוכן במרכז אנכית בתוך הקונטיינר */
 }
 
 .header-flex {
@@ -81,17 +87,26 @@ body::after {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    width: 100%; /* מוודא שהוא תופס את כל הרוחב הזמין */
+    height: 100%; /* מוודא שהוא תופס את כל הגובה הזמין */
 }
 
 .logo-left,
 .logo-right {
-    width: 60px;
+    height: 100%; /* גורם למיכל הלוגו למלא את גובה ה-header-flex */
+    width: auto; /* מאפשר לרוחב להתאים אוטומטית לפי גובה ותמונה */
+    display: flex; /* הופך את מיכל הלוגו לקונטיינר פלקס */
+    align-items: center; /* מיישר את התמונה במרכז אנכית בתוך המיכל */
+    justify-content: center; /* מיישר את התמונה במרכז אופקית בתוך המיכל */
 }
 
 .logo-left img,
 .logo-right img {
-    width: 100%;
-    height: auto;
+    height: 100%; /* גורם לתמונה למלא את גובה מיכל הלוגו */
+    width: auto; /* שומר על יחס הגובה-רוחב של התמונה */
+    object-fit: contain; /* מוודא שהתמונה כולה תהיה גלויה בתוך המיכל, ללא חיתוך */
+    box-shadow: none; /* הסרת צל אם היה */
+    border-radius: 0; /* הסרת פינות מעוגלות אם היו */
 }
 
 .nav {
