@@ -199,7 +199,7 @@ body::after {
     text-align: center;
     font-size: 3rem;
     margin-bottom: 3rem;
-    color: #8B4513;
+color: #000000;
 }
 
 .menu-grid {
@@ -210,8 +210,8 @@ body::after {
 .menu-category h3 {
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: #8B4513;
-    border-bottom: 3px solid #D2691E;
+color: #000000;
+ border-bottom: 3px solid #000000;
     padding-bottom: 0.5rem;
 }
 
@@ -274,7 +274,7 @@ body::after {
     text-align: center;
     font-size: 3rem;
     margin-bottom: 3rem;
-    color: #8B4513;
+  color: #000000;
 }
 
 .about-content {
@@ -304,7 +304,7 @@ body::after {
     text-align: center;
     font-size: 3rem;
     margin-bottom: 3rem;
-    color: #8B4513;
+color: #000000;
 }
 
 .contact-info {
@@ -326,7 +326,7 @@ body::after {
 .contact-item h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #8B4513;
+color: #8B4513;
 }
 
 .contact-item p {
@@ -423,7 +423,7 @@ body::after {
 
 .social-section h2 {
     font-size: 3rem;
-    color: #8B4513;
+   color: #000000;
     margin-bottom: 2rem;
 }
 
