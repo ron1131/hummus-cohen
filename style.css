@@ -353,28 +353,47 @@ color: #8B4513;
     .header {
         height: auto;
         padding: 10px 0;
+        position: relative;
     }
 
     .header-flex {
-        flex-direction: column;
+        flex-direction: column; /* התפריט מתחת */
+        align-items: center;
         gap: 10px;
+        position: relative;
     }
 
-    /* סדר אלמנטים במובייל */
-    .logo-left {
-        order: 1;
-    }
-
+    /* השפה במרכז */
     .language-switcher {
-        order: 2;
+        position: relative;
+        z-index: 2;
         text-align: center;
-        margin: 5px 0;
+        margin: 0 10px;
     }
 
+    /* לוגו שמאל */
+    .logo-left {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* לוגו ימין */
     .logo-right {
-        order: 3;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
+    /* התאמת גובה לוגואים במובייל */
+    .logo-left img,
+    .logo-right img {
+        height: 45px;
+    }
+
+    /* nav מתחת */
     .nav {
         order: 4;
         width: 100%;
@@ -384,11 +403,6 @@ color: #8B4513;
         flex-wrap: wrap;
         justify-content: center;
         gap: 10px;
-    }
-
-    .logo-left,
-    .logo-right {
-        height: 50px;
     }
 
     /* ===== תוכן שהיה לך ===== */
@@ -418,6 +432,7 @@ color: #8B4513;
         grid-template-columns: 1fr;
     }
 }
+
 
 
 .social-buttons {
