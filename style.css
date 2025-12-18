@@ -449,3 +449,48 @@ color: #8B4513;
   object-fit: contain;
   display: block;
 }
+/* ===== Language Dropdown ===== */
+.language-switcher {
+    position: relative;
+    font-family: 'Heebo', sans-serif;
+    white-space: nowrap;
+}
+
+.lang-title {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 6px 12px;
+    color: #333;
+}
+
+.lang-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #ffffff;
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+    border-radius: 8px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    z-index: 2000;
+    min-width: 140px;
+}
+
+.lang-dropdown li a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 400;
+}
+
+.lang-dropdown li a:hover {
+    background-color: #f2f2f2;
+}
+
+/* פתיחה בעת מעבר עכבר / נגיעה */
+.language-switcher:hover .lang-dropdown {
+    display: block;
+}
