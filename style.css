@@ -353,14 +353,14 @@ color: #8B4513;
     .header {
         height: auto;
         padding: 10px 0;
-        position: relative;
+        /* ❌ לא מגדירים position כאן כדי לא לשבור fixed */
     }
 
     .header-flex {
         flex-direction: column; /* התפריט מתחת */
         align-items: center;
         gap: 10px;
-        position: relative;
+        position: relative; /* דרוש ללוגואים בצדדים */
     }
 
     /* השפה במרכז */
@@ -391,11 +391,11 @@ color: #8B4513;
     .logo-left img,
     .logo-right img {
         height: 45px;
+        width: auto;
     }
 
     /* nav מתחת */
     .nav {
-        order: 4;
         width: 100%;
     }
 
@@ -432,6 +432,7 @@ color: #8B4513;
         grid-template-columns: 1fr;
     }
 }
+
 
 
 
