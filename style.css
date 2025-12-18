@@ -349,6 +349,7 @@ color: #8B4513;
 /* Responsive Design */
 @media (max-width: 768px) {
 
+    /* ===== header – מובייל ===== */
     .header {
         height: auto;
         padding: 10px 0;
@@ -359,12 +360,23 @@ color: #8B4513;
         gap: 10px;
     }
 
-    .logo-left,
+    /* סדר אלמנטים במובייל */
+    .logo-left {
+        order: 1;
+    }
+
+    .language-switcher {
+        order: 2;
+        text-align: center;
+        margin: 5px 0;
+    }
+
     .logo-right {
-        height: 50px;
+        order: 3;
     }
 
     .nav {
+        order: 4;
         width: 100%;
     }
 
@@ -374,7 +386,12 @@ color: #8B4513;
         gap: 10px;
     }
 
-    /* הקוד שהיה לך – נשאר */
+    .logo-left,
+    .logo-right {
+        height: 50px;
+    }
+
+    /* ===== תוכן שהיה לך ===== */
     .hero-content h1 {
         font-size: 2.5rem;
     }
@@ -401,6 +418,7 @@ color: #8B4513;
         grid-template-columns: 1fr;
     }
 }
+
 
 .social-buttons {
     display: flex;
