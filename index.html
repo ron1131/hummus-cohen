@@ -59,10 +59,9 @@
             display: none !important;
         }
 
-        /* פס התראה למעלה כשהאתר סגור */
-        body.store-closed::before {
-            content: "המסעדה סגורה כרגע להזמנות. ניתן לעיין בתפריט!";
-            display: block;
+        /* עיצוב פס ההתראה של המסעדה סגורה */
+        #closedStoreBanner {
+            display: none;
             background-color: #d9534f;
             color: white;
             text-align: center;
@@ -71,8 +70,13 @@
             font-weight: bold;
             position: sticky;
             top: 0;
-            z-index: 9999;
+            z-index: 99999;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* הצגת פס ההתראה רק כשהאתר במצב סגור */
+        body.store-closed #closedStoreBanner {
+            display: block;
         }
 
         .toggle-store-btn {
@@ -93,6 +97,9 @@
     </style>
 </head>
 <body>
+    <!-- פס ההתראה החדש שלא דוחף את הרקע -->
+    <div id="closedStoreBanner">המסעדה סגורה כרגע להזמנות. ניתן לעיין בתפריט!</div>
+    
     <div class="fixed-background"></div>
     
     <header class="header">
@@ -630,7 +637,6 @@
                 .then(response => response.text())
                 .then(data => {
                     const status = data.trim().toUpperCase();
-                    // תמיכה בזיהוי המילה 'CLOSED' באנגלית או 'סגור' בעברית
                     if (status.includes('CLOSED') || status.includes('סגור')) {
                         document.body.classList.add('store-closed');
                     } else {
