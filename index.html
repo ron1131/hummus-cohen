@@ -6,20 +6,101 @@
     <title>חומוס הכהן - מנות באהבה</title>
     <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-     <!-- Font Awesome for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-d5Ny6sXw2fp4nBqFgXL/PSa9HMSsB0kcgOpuf1NLHDmpE1LdiDdTfCrJZn4qJHlfvN1EwYyMtc0NVrwrB8ZUgQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DBYL202300"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-d5Ny6sXw2fp4nBqFgXL/PSa9HMSsB0kcgOpuf1NLHDmpE1LdiDdTfCrJZn4qJHlfvN1EwYyMtc0NVrwrB8ZUgQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DBYL202300"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-DBYL202300');
-</script>
+      gtag('config', 'G-DBYL202300');
+    </script>
+
+    <!-- תוספת CSS לעגלת הקניות, התוספות וכפתור ההסתרה -->
+    <style id="cart-custom-css">
+        .options-select {
+            width: 100%; padding: 8px; margin: 10px 0; border-radius: 6px;
+            border: 1px solid #ccc; font-family: 'Heebo', sans-serif; font-size: 1rem;
+            background: #fff; color: #333;
+        }
+        .add-to-cart-btn {
+            width: 100%; background: #e6a100; color: #2c251e; padding: 10px;
+            border: none; border-radius: 6px; font-weight: bold; font-size: 1.1rem;
+            cursor: pointer; transition: 0.2s; font-family: 'Heebo', sans-serif;
+        }
+        .add-to-cart-btn:hover { background: #cc8f00; }
+        .cart-item-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; border-bottom: 1px solid #eee; font-family: 'Heebo', sans-serif;
+            color: #333; text-align: right;
+        }
+        .remove-item-btn {
+            color: #d9534f; background: none; border: none; cursor: pointer;
+            font-size: 0.95rem; font-weight: bold; margin-right: 15px;
+        }
+        .addon-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 0; border-bottom: 1px solid #eee; font-size: 1.1rem;
+            cursor: pointer;
+        }
+        .addon-row label {
+            display: flex; align-items: center; width: 100%; cursor: pointer;
+        }
+        .addon-row input[type="checkbox"] {
+            margin-left: 12px; transform: scale(1.3); cursor: pointer;
+        }
+
+        /* --- תוספות למצב סגור והכפתור --- */
+        body.store-closed .add-to-cart-btn,
+        body.store-closed .options-select,
+        body.store-closed #cartBar {
+            display: none !important;
+        }
+
+        /* הודעה קופצת יפה כשהאתר סגור */
+        body.store-closed::after {
+            content: "המסעדה סגורה כרגע להזמנות. נשוב בקרוב!";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(217, 83, 79, 0.95);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            z-index: 9999;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+
+        .toggle-store-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 9999;
+            font-family: 'Heebo', sans-serif;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
     <div class="fixed-background"></div>
+    
+    <!-- כפתור המתג לניהול האתר (פתוח/סגור) - מוסתר כעת כי הניהול דרך האקסל -->
+    <!-- <button class="toggle-store-btn" onclick="toggleStore()">הפעל/כבה הזמנות</button> -->
+
     <header class="header">
     <div class="container header-flex">
         <div class="logo-left">
@@ -56,10 +137,9 @@
 </header>
 
 
-    <main>
+    <main style="padding-bottom: 80px;">
         <section id="home" class="hero">
             <div class="hero-content">
-       
                 <a href="#menu" class="cta-button">צפה בתפריט</a>
             </div>
         </section>
@@ -71,103 +151,147 @@
                  <div class="menu-category">
     <h3>ליד הניגוב</h3>
     <div class="menu-items">
-        <div class="menu-item">
+        <div class="menu-item" data-name="קצוץ טרי">
             <img src="salad_fresh.jpg" alt="סלט קצוץ טרי" class="menu-item-image" />
             <div class="menu-item-content">
                 <h4>קצוץ טרי</h4>
                 <p>סלט ירקות טרי ורענן</p>
                 <span class="price">18₪</span>
+                
+                <select class="options-select"><option value="מנה" data-price="18">מנה - 18 ₪</option></select>
+                <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
             </div>
         </div>
-        <div class="menu-item">
+        <div class="menu-item" data-name="קצוץ הכהן">
             <img src="salad_cohen.jpg" alt="סלט קצוץ הכהן" class="menu-item-image" />
             <div class="menu-item-content">
                 <h4>קצוץ הכהן</h4>
                 <p>סלט ירקות טרי בתוספת גרגרי חומוס חמים, טחינה וביצה קשה</p>
                 <span class="price">34₪</span>
+                
+                <select class="options-select"><option value="מנה" data-price="34">מנה - 34 ₪</option></select>
+                <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
             </div>
         </div>
-        <div class="menu-item">
+        <div class="menu-item" data-name="צ'יפס פריך">
             <img src="chps.jpg" alt="צ'יפס פריך" class="menu-item-image" />
             <div class="menu-item-content">
                 <h4>צ'יפס פריך</h4>
                 <p>צ'יפס פריך וטעים במיוחד</p>
-                                <p><span class="price">גדול – 28₪</span> | <span class="price">קטן – 16₪</span></p>
+                <p><span class="price">גדול – 28₪</span> | <span class="price">קטן – 16₪</span></p>
 
+                <select class="options-select">
+                    <option value="גדול" data-price="28">גדול - 28 ₪</option>
+                    <option value="קטן" data-price="16">קטן - 16 ₪</option>
+                </select>
+                <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
             </div>
-     
         </div>
-        <div class="menu-item">
+        <div class="menu-item" data-name="שקשוקה של פעם">
             <img src="shksuka.jpg" alt="שקשוקה של פעם" class="menu-item-image" />
             <div class="menu-item-content">
                 <h4>שקשוקה של פעם</h4>
                 <p>אשכנזי/מרוקאי</p>
-<p>רוטב עגבניות מ - <span style="font-size: 2em;">💯</span> אחוז עגבניות טריות.</p>
+                <p>רוטב עגבניות מ - <span style="font-size: 2em;">💯</span> אחוז עגבניות טריות.</p>
                 <span class="price">42₪</span>
+                
+                <select class="options-select"><option value="מנה" data-price="42">מנה - 42 ₪</option></select>
+                <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
             </div>
         </div>
     </div>
 </div>
 
 
-             <div class="menu-category">
+<div class="menu-category">
     <h3>בדוך / בסיבוב</h3>
     <div class="menu-items">
-        <div class="menu-item">
+        <div class="menu-item" data-name="חומוס נקי" data-has-addons="true">
             <img src="hummus.jpg" alt="חומוס נקי" class="menu-item-image" />
             <div class="menu-item-content">
                 <h4>נקי</h4>
                 <p>חומוס ביתי קרמי</p>
                 <p><span class="price">רעב – 39₪</span> | <span class="price">חצי רעב – 26₪</span></p>
+                
+                <select class="options-select">
+                    <option value="רעב" data-price="39">רעב - 39 ₪</option>
+                    <option value="חצי רעב" data-price="26">חצי רעב - 26 ₪</option>
+                </select>
+                <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
             </div>
         </div>
 
-        <div class="menu-item">
+        <div class="menu-item" data-name="קומפלט" data-has-addons="true">
             <img src="falafel.jpg" alt="קומפלט" class="menu-item-image" />
             <div class="menu-item-content">
                 <h4>קומפלט</h4>
                 <p>גרגרי חומוס, פול, טחינה וביצה</p>
                 <p><span class="price">רעב – 42₪</span> | <span class="price">חצי רעב – 29₪</span></p>
+
+                <select class="options-select">
+                    <option value="רעב" data-price="42">רעב - 42 ₪</option>
+                    <option value="חצי רעב" data-price="29">חצי רעב - 29 ₪</option>
+                </select>
+                <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
             </div>
         </div>
 
-        <div class="menu-item">
+        <div class="menu-item" data-name="מסבחה" data-has-addons="true">
             <img src="mesabaha.jpg" alt="מסבחה" class="menu-item-image" />
             <div class="menu-item-content">
                 <h4>מסבחה</h4>
                 <p>גרגירי חומוס חמים בטחינה</p>
                 <p><span class="price">רעב – 41₪</span> | <span class="price">חצי רעב – 29₪</span></p>
+                
+                <select class="options-select">
+                    <option value="רעב" data-price="41">רעב - 41 ₪</option>
+                    <option value="חצי רעב" data-price="29">חצי רעב - 29 ₪</option>
+                </select>
+                <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
             </div>
         </div>
 
-        <div class="menu-item">
+        <div class="menu-item" data-name="חומסביח" data-has-addons="true">
             <img src="homsabich.jpg" alt="חומסביח" class="menu-item-image" />
             <div class="menu-item-content">
                 <h4>חומסביח</h4>
                 <p>גרגרי חומוס, טחינה חציל, ביצה קשה ועמבה</p>
                 <p><span class="price">רעב – 47₪</span> | <span class="price">חצי רעב – 32₪</span></p>
+
+                <select class="options-select">
+                    <option value="רעב" data-price="47">רעב - 47 ₪</option>
+                    <option value="חצי רעב" data-price="32">חצי רעב - 32 ₪</option>
+                </select>
+                <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
             </div>
         </div>
 
-        <div class="menu-item">
+        <div class="menu-item" data-name="חמשוקה" data-has-addons="true">
             <img src="hamshuka.jpg" alt="חמשוקה" class="menu-item-image" />
             <div class="menu-item-content">
                 <h4>חמשוקה</h4>
                 <p>חומוס עם שקשוקה</p>
                 <p><span class="price">רעב – 49₪</span></p>
+
+                <select class="options-select"><option value="רעב" data-price="49">רעב - 49 ₪</option></select>
+                <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
             </div>
         </div>
         
-        <!-- התוספת החדשה: שווארמה טבעונית -->
-        <div class="menu-item">
+        <div class="menu-item" data-name="שווארמה טבעונית" data-has-addons="true">
             <img src="vegan_shawarma.jpg" alt="שווארמה (טבעונית)" class="menu-item-image" />
             <div class="menu-item-content">
                 <h4>שווארמה (טבעונית)</h4>
                 <p>שווארמה טבעונית על מצע חומוס</p>
                 <p><span class="price">רעב – 51₪</span> | <span class="price">חצי רעב – 38₪</span></p>
+
+                <select class="options-select">
+                    <option value="רעב" data-price="51">רעב - 51 ₪</option>
+                    <option value="חצי רעב" data-price="38">חצי רעב - 38 ₪</option>
+                </select>
+                <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
             </div>
         </div>
-        <!-- סוף התוספת -->
         
     </div>
 </div>
@@ -181,135 +305,174 @@
                                     <span class="price">פינוק</span>
                                 </div>
                             </div>
-                            <div class="menu-item">
+                            <div class="menu-item" data-name="תוספות בתשלום">
                                 <div class="menu-item-content">
                                     <h4>אנחנו מפנקים אתם משלמים !</h4>
                                     <p>ביצה, חציל,  פטריות</p>
                                     <span class="price"> 3₪ | 8₪ |  12₪ </span>
+
+                                    <select class="options-select">
+                                        <option value="ביצה" data-price="3">ביצה - 3 ₪</option>
+                                        <option value="חציל" data-price="8">חציל - 8 ₪</option>
+                                        <option value="פטריות" data-price="12">פטריות - 12 ₪</option>
+                                    </select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             </div>
        </div>
                     </div>
                 </div>
 
-
  <div class="menu-category">
                         <h3>לקחת הביתה</h3>
                         <div class="menu-items">
 
- <div class="menu-item">
+ <div class="menu-item" data-name="טחינה גולמית">
                                 <img src="Raw_tahini.jpg" alt="טחינה גולמית" class="menu-item-image" />
                                 <div class="menu-item-content">
                                     <h4>טחינה גולמית</h4>
                                     <p>טחינה גולמית מהכנה ביתית, עשויה באהבה – כל כפית תרגיש בפה: טעם עמוק, טבעי ואותנטי.</p>
                                     <span class="price">700 ג'ר 27₪</span>
+
+                                    <select class="options-select"><option value="700 ג'ר" data-price="27">700 ג'ר - 27 ₪</option></select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             		   </div>
 
- <div class="menu-item">
+ <div class="menu-item" data-name="זיתים">
                                 <img src="olives.jpg" alt="זיתים" class="menu-item-image" />
                                 <div class="menu-item-content">
                                     <h4>זיתים</h4>
                                     <p>זיתים מובחרים שנבחרו בקפידה, בכבישה מסורתית ובטעם עמוק ומאוזן, כאלה שמשלימים כל ניגוב ונותנים ביס קטן של בית בכל פעם.</p>
                                     <span class="price">500 ג'ר 23₪</span>
+
+                                    <select class="options-select"><option value="500 ג'ר" data-price="23">500 ג'ר - 23 ₪</option></select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             		   </div>
 
-<div class="menu-item">
+<div class="menu-item" data-name="שמן זית">
                                 <img src="olive_oil.jpg" alt="olive_oil.jpg" class="menu-item-image" />
                                 <div class="menu-item-content">
                                     <h4>שמן זית</h4>
                                     <p>שמן זית שכל זית נבחר בקפידה, בכבישה מסורתית ובטעם עמוק ומאוזן, כאלה שמשלימים כל ניגוב.</p>
                                     <span class="price">250 מל' 25₪ | 750 מל' 43₪ </span>
+
+                                    <select class="options-select">
+                                        <option value="750 מל'" data-price="43">750 מל' - 43 ₪</option>
+                                        <option value="250 מל'" data-price="25">250 מל' - 25 ₪</option>
+                                    </select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             		   </div>
 
-
-
 </div>
 </div>
 
-
-
-
-                                        <!-- קטגוריה חדשה: יבש לי בגרון - גרסה מקוצרת -->
                     <div class="menu-category">
                         <h3>יבש לי בגרון</h3>
                         <div class="menu-items">
-                            <div class="menu-item">
+                            <div class="menu-item" data-name="משקאות עם גזים">
                                 <img src="drinks_gas.jpg" alt="משקאות עם גזים" class="menu-item-image" />
                                 <div class="menu-item-content">
                                     <h4>עם גזים</h4>
                                     <p>קולה/זירו, קולה כתום, ספרייט/זירו</p>
                                     <span class="price">12₪</span>
+
+                                    <select class="options-select">
+                                        <option value="קולה / זירו" data-price="12">קולה / זירו - 12 ₪</option>
+                                        <option value="קולה כתום" data-price="12">קולה כתום - 12 ₪</option>
+                                        <option value="ספרייט / זירו" data-price="12">ספרייט / זירו - 12 ₪</option>
+                                    </select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             </div>
-                            <div class="menu-item">
+                            <div class="menu-item" data-name="משקאות בלי גזים">
                                 <img src="drinks_no_gas.jpg" alt="משקאות בלי גזים" class="menu-item-image" />
                                 <div class="menu-item-content">
                                     <h4>בלי גזים</h4>
                                     <p>מנגו, תות-בננה, ענבים</p>
                                     <span class="price">10₪</span>
+
+                                    <select class="options-select">
+                                        <option value="מנגו" data-price="10">מנגו - 10 ₪</option>
+                                        <option value="תות בננה" data-price="10">תות בננה - 10 ₪</option>
+                                        <option value="ענבים" data-price="10">ענבים - 10 ₪</option>
+                                    </select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             </div>
-                            <div class="menu-item">
+                            <div class="menu-item" data-name="מים מהטבע">
                                 <img src="water_types.jpg" alt="מים קופצים/מים מהטבע" class="menu-item-image" />
                                 <div class="menu-item-content">
                                     <h4>מים קופצים/מים מהטבע</h4>
                                     <span class="price">8₪</span>
+
+                                    <select class="options-select">
+                                        <option value="מים מהטבע" data-price="8">מים מהטבע - 8 ₪</option>
+                                        <option value="מים קופצים (סודה)" data-price="8">מים קופצים (סודה) - 8 ₪</option>
+                                    </select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             </div>
-                            <div class="menu-item">
+                            <div class="menu-item" data-name="פיוזטי אפרסק">
                                 <img src="fuze_tea_peach.jpg" alt="פיוזטי אפרסק" class="menu-item-image" />
                                 <div class="menu-item-content">
                                     <h4>פיוזטי אפרסק</h4>
                                     <span class="price">14₪</span>
+                                    
+                                    <select class="options-select"><option value="בקבוק" data-price="14">בקבוק - 14 ₪</option></select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             </div>
-                            <div class="menu-item">
+                            <div class="menu-item" data-name="מאלטי">
                                 <img src="malty.jpg" alt="מאלטי" class="menu-item-image" />
                                 <div class="menu-item-content">
                                     <h4>מאלטי</h4>
                                     <span class="price">14₪</span>
+                                    
+                                    <select class="options-select"><option value="בקבוק" data-price="14">בקבוק - 14 ₪</option></select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             </div>
-                        
 
- <div class="menu-item">
+ <div class="menu-item" data-name="ערק לימונים">
                                 <img src="Lemon_Arak.jpg" alt="ערק לימונים" class="menu-item-image" />
                                 <div class="menu-item-content">
                                     <h4>ערק לימונים</h4>
                                     <p>ערק לימונים הוא משקה אלכוהולי רענן שמופק מתאנים בזיקוק ביתי ולימונים.</p>
                                     <span class="price">140₪ לבקבוק</span>
+                                    
+                                    <select class="options-select"><option value="בקבוק" data-price="140">בקבוק - 140 ₪</option></select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             </div>
 
-
- <div class="menu-item">
+ <div class="menu-item" data-name="ערק קפה">
                                 <img src="Coffee_Arak.jpg" alt="ערק קפה" class="menu-item-image" />
                                 <div class="menu-item-content">
                                     <h4>ערק קפה</h4>
                                     <p>ערק קפה הוא משקה אלכוהולי רענן שמופק בזיקוק ביתי מתאנים ופולי.</p>
                                     <span class="price">140₪ לבקבוק</span>
+                                    
+                                    <select class="options-select"><option value="בקבוק" data-price="140">בקבוק - 140 ₪</option></select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             </div>
 
- <div class="menu-item">
+ <div class="menu-item" data-name="ערק מסאלה">
                                 <img src="Masala_Arak.jpg" alt="ערק מסאלה" class="menu-item-image" />
                                 <div class="menu-item-content">
                                     <h4>ערק מסאלה</h4>
                                     <p>ערק מסאלה הוא משקה אלכוהולי רענן שמופק בזיקוק ביתי בתוספת תבלים הודים שיקפיץ לכם את האווירה .</p>
                                     <span class="price">140₪ לבקבוק</span>
+                                    
+                                    <select class="options-select"><option value="בקבוק" data-price="140">בקבוק - 140 ₪</option></select>
+                                    <button class="add-to-cart-btn" onclick="addToCart(this)">הוסף לעגלה</button>
                                 </div>
                             </div>
-
-
              </div>
                     </div>
-                    <!-- סוף קטגוריה חדשה - גרסה מקוצרת -->
-
-
-
 
         </section>
 
@@ -338,8 +501,6 @@
     </div>
 </section>
 
-
-
         <section id="contact" class="contact-section">
             <div class="container">
                 <h2>צור קשר</h2>
@@ -354,7 +515,6 @@
     <h3>כתובת</h3>
  <p><a href="https://maps.app.goo.gl/iDsUQauMMHTxh8uB9" target="_blank">דרך ארץ 54 חריש</a></p>   
  <p><a href="https://maps.app.goo.gl/oyehk4bq5sQAKqwb7" target="_blank">החניה בשפע ברחוב זית 1</a></p>
-   
 </div>
 
                     <div class="contact-item">
@@ -364,7 +524,6 @@
  <p>ו'</p> 
  <p>9:30-14:00</p>   
  <p>או עד גמר החומוס  </p> 
- 
       </div>
                 </div>
             </div>
@@ -377,6 +536,300 @@
         </div>
     </footer>
 
+    <!-- באנר תחתון צף של העגלה -->
+    <div id="cartBar" onclick="toggleCartModal(true)" style="position: fixed; bottom: 0; left: 0; right: 0; background-color: #2c251e; color: #fff; padding: 15px 20px; display: none; justify-content: space-between; align-items: center; box-shadow: 0 -4px 10px rgba(0,0,0,0.2); z-index: 1000; cursor: pointer; font-family: 'Heebo', sans-serif;">
+        <div style="font-size: 1.1rem;">🛒 <span id="cartCount">0</span> פריטים בעגלה</div>
+        <button style="background-color: #e6a100; color: #2c251e; padding: 10px 20px; border-radius: 20px; font-weight: 700; border: none; cursor: pointer; font-family: 'Heebo', sans-serif;">
+            צפה בהזמנה (<span id="cartTotal">0</span> ₪)
+        </button>
+    </div>
+
+    <!-- מודל לבחירת תוספות ושתייה -->
+    <div id="addonsModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 2500; padding: 15px; font-family: 'Heebo', sans-serif;">
+        <div class="cart-content" style="background-color: #fff; width: 100%; max-width: 400px; border-radius: 16px; overflow: hidden; color: #2c251e; text-align: right; direction: rtl;">
+            <div style="background-color: #2c251e; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="margin: 0; font-size: 1.3rem;">עוד קצת וסיימנו...</h2>
+                <button onclick="closeAddonsModal()" style="background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">✕</button>
+            </div>
+            
+            <div style="padding: 20px;">
+                <h3 id="addonsItemName" style="margin-top: 0; margin-bottom: 10px; color: #e6a100;"></h3>
+                
+                <!-- תוספות אוכל -->
+                <h4 style="margin: 0 0 10px 0; color: #333; font-weight: 600;">תוספות מעל המנה:</h4>
+                <div class="addon-row">
+                    <label>
+                        <input type="checkbox" class="addon-checkbox-input" value="ביצה" data-price="3">
+                        ביצה קשה (+3 ₪)
+                    </label>
+                </div>
+                <div class="addon-row">
+                    <label>
+                        <input type="checkbox" class="addon-checkbox-input" value="חציל" data-price="8">
+                        חציל מטוגן (+8 ₪)
+                    </label>
+                </div>
+                <div class="addon-row" style="border-bottom: none; margin-bottom: 15px;">
+                    <label>
+                        <input type="checkbox" class="addon-checkbox-input" value="פטריות" data-price="12">
+                        פטריות חמות (+12 ₪)
+                    </label>
+                </div>
+
+                <!-- תוספת שתייה -->
+                <h4 style="margin: 10px 0 10px 0; color: #333; font-weight: 600; border-top: 1px solid #eee; padding-top: 15px;">משהו לשתות?</h4>
+                <select id="addonDrinkSelect" class="options-select" style="margin-bottom: 20px;">
+                    <option value="" data-price="0">ללא שתייה</option>
+                    <option value="קולה / זירו" data-price="12">קולה / זירו - 12 ₪</option>
+                    <option value="ספרייט / זירו" data-price="12">ספרייט / זירו - 12 ₪</option>
+                    <option value="ענבים" data-price="10">ענבים - 10 ₪</option>
+                    <option value="מנגו" data-price="10">מנגו - 10 ₪</option>
+                    <option value="מים מהטבע" data-price="8">מים מהטבע - 8 ₪</option>
+                    <option value="סודה" data-price="8">סודה - 8 ₪</option>
+                    <option value="פיוזטי אפרסק" data-price="14">פיוזטי אפרסק - 14 ₪</option>
+                    <option value="מאלטי" data-price="14">מאלטי (בירה שחורה) - 14 ₪</option>
+                </select>
+
+                <button onclick="confirmAddonsAndAddToCart()" style="width: 100%; background-color: #e6a100; color: #2c251e; border: none; padding: 14px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 5px; font-family: inherit;">
+                    אפשר להמשיך
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- מודל עגלת קניות קופץ לסיכום -->
+    <div id="cartModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 15px; font-family: 'Heebo', sans-serif;">
+        <div class="cart-content" style="background-color: #fff; width: 100%; max-width: 500px; border-radius: 16px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; color: #2c251e; text-align: right; direction: rtl;">
+            <div style="background-color: #2c251e; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="margin: 0; font-size: 1.4rem;">ההזמנה שלך</h2>
+                <button onclick="toggleCartModal(false)" style="background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">✕</button>
+            </div>
+            
+            <div id="cartItemsList" style="padding: 15px; overflow-y: auto; flex-grow: 1;">
+                <!-- הפריטים יתעדכנו כאן אוטומטית -->
+            </div>
+
+            <div style="padding: 15px; background-color: #f9f9f9; border-top: 1px solid #eee;">
+                <div style="margin-bottom: 12px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">שם מלא:</label>
+                    <input type="text" id="clientName" placeholder="הכנס את שמך" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; font-family: inherit;">
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">טלפון לחזרה:</label>
+                    <input type="tel" id="clientPhone" placeholder="למשל: 0523016020" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; font-family: inherit;">
+                </div>
+                
+                <button onclick="sendOrderToWhatsApp()" style="width: 100%; background-color: #25D366; color: white; border: none; padding: 14px; border-radius: 8px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 10px; font-family: inherit;">
+                    🚀 שלח הזמנה לוואטסאפ
+                </button>
+                <div style="font-size: 0.85rem; text-align: center; color: #666; margin-top: 8px; font-weight: 600;">🔒 ללא אשראי - התשלום בקופה בעת האיסוף</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- סקריפט ניהול העגלה והתוספות עם קריאה מגוגל שיטס -->
+    <script>
+        const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2nA0YICG16EYdvre0AyuOOcReMmtPEgh59l_NXSWy2boaEMwrHRNc3Ih0yl5tH4nZwsqSifMn1oRR/pub?output=csv';
+
+        function checkStoreStatus() {
+            fetch(sheetCsvUrl)
+                .then(response => response.text())
+                .then(data => {
+                    const status = data.trim().toUpperCase();
+                    if (status.includes('CLOSED')) {
+                        document.body.classList.add('store-closed');
+                    } else {
+                        document.body.classList.remove('store-closed');
+                    }
+                })
+                .catch(error => console.error('שגיאה בבדיקת סטטוס האתר מ-Google Sheets:', error));
+        }
+
+        let cart = JSON.parse(localStorage.getItem('cohenCart')) || [];
+        const WHATSAPP_NUMBER = "972523016020";
+        let pendingItemForAddons = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkStoreStatus();
+            setInterval(checkStoreStatus, 60000); // בדיקה מחודשת כל דקה
+            updateCartUI();
+        });
+
+        function addToCart(button) {
+            const menuItem = button.closest('[data-name]');
+            if (!menuItem) return;
+            
+            const select = menuItem.querySelector('.options-select');
+            const selectedOption = select.options[select.selectedIndex];
+            
+            const name = menuItem.getAttribute('data-name');
+            const optionName = selectedOption.value;
+            const price = parseFloat(selectedOption.getAttribute('data-price'));
+            
+            const hasAddons = menuItem.getAttribute('data-has-addons') === 'true';
+
+            if (hasAddons) {
+                pendingItemForAddons = { name, option: optionName, price, button };
+                openAddonsModal(name);
+            } else {
+                finalizeAddToCart(name, optionName, price, button);
+            }
+        }
+
+        function openAddonsModal(itemName) {
+            document.getElementById('addonsItemName').innerText = itemName;
+            const checkboxes = document.querySelectorAll('.addon-checkbox-input');
+            checkboxes.forEach(cb => cb.checked = false);
+            document.getElementById('addonDrinkSelect').selectedIndex = 0;
+            document.getElementById('addonsModal').style.display = 'flex';
+        }
+
+        function closeAddonsModal() {
+            document.getElementById('addonsModal').style.display = 'none';
+            pendingItemForAddons = null;
+        }
+
+        function confirmAddonsAndAddToCart() {
+            if (!pendingItemForAddons) return;
+
+            let additionalPrice = 0;
+            let extrasNames = [];
+
+            const checkboxes = document.querySelectorAll('.addon-checkbox-input:checked');
+            checkboxes.forEach(cb => {
+                additionalPrice += parseFloat(cb.getAttribute('data-price'));
+                extrasNames.push(cb.value);
+            });
+
+            let finalName = pendingItemForAddons.name;
+            if (extrasNames.length > 0) {
+                finalName += ` (+ ${extrasNames.join(', ')})`;
+            }
+            
+            let finalPrice = pendingItemForAddons.price + additionalPrice;
+
+            finalizeAddToCart(finalName, pendingItemForAddons.option, finalPrice, pendingItemForAddons.button);
+
+            const drinkSelect = document.getElementById('addonDrinkSelect');
+            const selectedDrinkOption = drinkSelect.options[drinkSelect.selectedIndex];
+            const drinkValue = selectedDrinkOption.value;
+            const drinkPrice = parseFloat(selectedDrinkOption.getAttribute('data-price'));
+
+            if (drinkValue !== "") {
+                finalizeAddToCart(drinkValue, "שתייה", drinkPrice, pendingItemForAddons.button);
+            }
+
+            closeAddonsModal();
+        }
+
+        function finalizeAddToCart(name, optionName, price, button) {
+            const existingItem = cart.find(item => item.name === name && item.option === optionName);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, option: optionName, price, quantity: 1 });
+            }
+            
+            updateCartUI();
+            
+            const originalText = button.innerText;
+            button.innerText = "✓ נוסף לעגלה";
+            button.style.backgroundColor = "#25D366";
+            button.style.color = "#fff";
+            setTimeout(() => {
+                button.innerText = originalText;
+                button.style.backgroundColor = "#e6a100";
+                button.style.color = "#2c251e";
+            }, 800);
+        }
+
+        function updateCartUI() {
+            const cartBar = document.getElementById('cartBar');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartItemsList = document.getElementById('cartItemsList');
+            
+            let totalItems = 0;
+            let totalPrice = 0;
+            cartItemsList.innerHTML = '';
+
+            cart.forEach((item, index) => {
+                totalItems += item.quantity;
+                totalPrice += (item.price * item.quantity);
+
+                const row = document.createElement('div');
+                row.className = 'cart-item-row';
+                row.innerHTML = `
+                    <div>
+                        <strong>${item.name}</strong> (${item.option})<br>
+                        <span style="font-size: 0.9rem;">${item.quantity} יח' x ${item.price} ₪</span>
+                    </div>
+                    <div style="display:flex; align-items:center;">
+                        <strong style="margin-left: 15px;">${item.price * item.quantity} ₪</strong>
+                        <button class="remove-item-btn" onclick="removeFromCart(${index})">הסר</button>
+                    </div>
+                `;
+                cartItemsList.appendChild(row);
+            });
+
+            cartCount.innerText = totalItems;
+            cartTotal.innerText = totalPrice;
+
+            if (totalItems > 0) {
+                cartBar.style.display = 'flex';
+            } else {
+                cartBar.style.display = 'none';
+                toggleCartModal(false);
+            }
+
+            localStorage.setItem('cohenCart', JSON.stringify(cart));
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCartModal(show) {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = show ? 'flex' : 'none';
+        }
+
+        function sendOrderToWhatsApp() {
+            const name = document.getElementById('clientName').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+
+            if (!name || !phone) {
+                alert('אנא מלא שם מלא ומספר טלפון כדי שנוכל להכין את ההזמנה!');
+                return;
+            }
+
+            if (cart.length === 0) return;
+
+            let message = `שלום חומוס הכהן 👋, אני רוצה לבצע הזמנה לאיסוף מהקופה:\n\n`;
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                message += `▪️ *${item.quantity}x* ${item.name} (${item.option}) - ${itemTotal} ₪\n`;
+            });
+
+            message += `\n💰 *סך הכל לתשלום בקופה:* ${total} ₪\n\n`;
+            message += `👤 *פרטי המזמין:*\n`;
+            message += `שם: ${name}\n`;
+            message += `טלפון: ${phone}\n\n`;
+            message += `📍 איסוף מדרך ארץ 54, חריש. תודה!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedMessage}`, '_blank');
+            
+            cart = [];
+            updateCartUI();
+            toggleCartModal(false);
+        }
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
